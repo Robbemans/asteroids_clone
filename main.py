@@ -24,7 +24,7 @@ def main():
 
     asteroids = pygame.sprite.Group()
     Asteroid.containers = (asteroids, updatable, drawable)
-    AsteroidField.containers = (updatable)
+    AsteroidField.containers = (updatable,)
     asteroidfield = AsteroidField()
 
     while True:
@@ -34,14 +34,12 @@ def main():
                 return
             
         screen.fill("black")
-
+        updatable.update(dt)
         for i in drawable:
             i.draw(screen)
 
-        updatable.update(dt)
         pygame.display.flip()
-        clock.tick(60)
-        dt += (clock.tick(60)/1000)
+        dt = (clock.tick(60)/1000)
         
 
 
