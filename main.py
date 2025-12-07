@@ -1,5 +1,5 @@
 import pygame
-from constants import SCREEN_HEIGHT, SCREEN_WIDTH, PLAYER_RADIUS
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH, PLAYER_RADIUS, SHOT_RADIUS
 from logger import log_state, log_event
 from player import Player
 from circleshape import CircleShape
@@ -31,6 +31,8 @@ def main():
 
     shots = pygame.sprite.Group()
     Shot.containers = (shots, updatable, drawable)
+    
+    
 
     while True:
         log_state()
@@ -40,12 +42,18 @@ def main():
             
         screen.fill("black")
         updatable.update(dt)
+        player.cooldown -= dt
         
         for object in asteroids:
             if player.collides_with(object):
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+            for shot in shots:
+                if shot.collides_with(object):
+                    log_event("asteroid_shot")
+                    object.kill()
+                    shot.kill()
 
         for i in drawable:
             i.draw(screen)
