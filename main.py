@@ -1,8 +1,7 @@
 import pygame
-from constants import SCREEN_HEIGHT, SCREEN_WIDTH, PLAYER_RADIUS, SHOT_RADIUS
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH, PLAYER_RADIUS
 from logger import log_state, log_event
 from player import Player
-from circleshape import CircleShape
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
